@@ -1,0 +1,10 @@
+[package]
+name = "homelab_wol"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+
+[[bin]]
+name = "homelab-wol"
+path = "src/main.rs"

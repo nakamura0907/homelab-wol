@@ -3,5 +3,5 @@
 version = 4
 
 [[package]]
-name = "homelab-wol"
+name = "homelab_wol"
 version = "0.1.0"
