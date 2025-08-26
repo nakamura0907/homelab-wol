@@ -25,7 +25,7 @@ fn send_magic_packet(mac_address: String) -> Result<(), Box<dyn Error>> {
     let mac_bytes = parse_mac_address(&mac_address);
     let packet = create_magic_packet(&mac_bytes);
 
-    let socket = UdpSocket::bind("0.0.0.0")?;
+    let socket = UdpSocket::bind("0.0.0.0:0")?;
     socket.set_broadcast(true)?;
 
     socket.send_to(&packet, "255.255.255.255:9")?;
