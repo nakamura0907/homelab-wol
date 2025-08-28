@@ -4,9 +4,8 @@ use thiserror::Error;
 
 #[derive(Debug, Error)]
 pub enum MacAddressError {
-    #[error("Invalid MAC address format: {0}")]
-    InvalidFormat(String),
-
+    // #[error("Invalid MAC address format: {0}")]
+    // InvalidFormat(String),
     #[error("MAC address must be exactly 6 bytes, got {0} bytes")]
     InvalidLength(usize),
 
@@ -33,7 +32,6 @@ pub enum WolError {
 
     #[error("Network error: {0}")]
     Network(#[from] NetworkError),
-
-    #[error("Unexpected error: {0}")]
-    Unexpected(String),
+    // #[error("Unexpected error: {0}")]
+    // Unexpected(String),
 }
