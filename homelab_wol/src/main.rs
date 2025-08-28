@@ -1,6 +1,7 @@
 use std::error::Error;
 
 mod cli;
+mod errors;
 mod wol;
 
 use crate::wol::send_magic_packet;
