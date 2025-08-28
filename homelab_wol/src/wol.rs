@@ -56,14 +56,46 @@ mod tests {
         assert_eq!(bytes, [0x00, 0x11, 0x22, 0x33, 0x44, 0x55]);
     }
 
-    // #[test]
-    // fn test_parse_mac_address_invalid() {
-    //     let mac = "invalid";
+    #[test]
+    fn test_parse_mac_address_errors() {
+        struct TestCase<'a> {
+            input: &'a str,
+            expected: MacAddressError,
+        }
 
-    //     let bytes = parse_mac_address(mac);
+        let cases = vec![
+            TestCase {
+                input: "00:11:22",
+                expected: MacAddressError::InvalidLength(3),
+            },
+            TestCase {
+                input: "00:11:22:33:44:55:66",
+                expected: MacAddressError::InvalidLength(7),
+            },
+            TestCase {
+                input: "00:11:22:33:44:zz",
+                expected: MacAddressError::InvalidHex("zz".to_string()),
+            },
+            TestCase {
+                input: "00:11:22:33:44:gg",
+                expected: MacAddressError::InvalidHex("gg".to_string()),
+            },
+            TestCase {
+                input: "",
+                expected: MacAddressError::InvalidLength(1),
+            },
+        ];
 
-    //     assert_eq!(bytes, [0, 0, 0, 0, 0, 0]);
-    // }
+        for case in cases {
+            let err = parse_mac_address(case.input).unwrap_err();
+            assert_eq!(
+                err.to_string(),
+                case.expected.to_string(),
+                "input = {}",
+                case.input
+            );
+        }
+    }
 
     #[test]
     fn test_create_magic_packet_structure() {
