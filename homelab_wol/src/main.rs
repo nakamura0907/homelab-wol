@@ -8,6 +8,7 @@ use crate::wol::send_magic_packet;
 use crate::cli::Options;
 
 fn main() -> Result<(), WolError> {
+    // Parse command-line options
     let options = Options::new();
 
     run(options)?;
@@ -15,9 +16,11 @@ fn main() -> Result<(), WolError> {
     Ok(())
 }
 
-/// メインエントリポイントの実行
+/// Runs the main application logic.
+///
+/// This function sends a WOL magic packet.
 fn run(options: Options) -> Result<(), WolError> {
-    println!("MACアドレス = {}", options.mac_address);
+    println!("Target MAC address = {}", options.mac_address);
 
     send_magic_packet(options.mac_address)?;
 
