@@ -3,8 +3,8 @@ use std::net::UdpSocket;
 use crate::errors::{MacAddressError, NetworkError, WolError};
 
 /// Sends a Wake-on-LAN (WOL) magic packet.
-pub fn send_magic_packet(mac_address: String) -> Result<(), WolError> {
-    let mac_bytes = parse_mac_address(&mac_address)?;
+pub fn send_magic_packet(mac_address: &str) -> Result<(), WolError> {
+    let mac_bytes = parse_mac_address(mac_address)?;
     let packet = create_magic_packet(&mac_bytes);
 
     // Create a UDP socket bound to any available local address and port

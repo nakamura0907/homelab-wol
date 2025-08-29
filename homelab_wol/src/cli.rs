@@ -8,6 +8,9 @@ use clap::Parser;
 pub struct Options {
     /// The target device's MAC address to send the magic packet to.
     pub mac_address: String,
+    /// Enable verbose output
+    #[arg(short, long)]
+    pub verbose: bool,
 }
 
 impl Options {
